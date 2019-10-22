@@ -1,4 +1,4 @@
-package com.bellini.pdimmixx.model
+package com.bellini.pdimmixx.models
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.Entity
@@ -11,8 +11,8 @@ data class User(
         @GeneratedValue
         @JsonProperty("id", access = JsonProperty.Access.READ_ONLY)
         val id: Long = 0L,
-        val name: String = "",
+        val fullName: String = "",
         val email: String = "",
-        val password: String = "",
+        var password: String = "",
         val isActive: Boolean = true
 )

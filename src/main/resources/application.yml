@@ -1,0 +1,15 @@
+spring:
+  profiles: dev
+  application:
+    name: PdimmixxApplication.kt
+  datasource:
+    url: jdbc:hsqldb:file:database/main/db
+    username: sa
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+  jpa:
+  properties:
+    hibernate.dialect: org.hibernate.dialect.HSQLDialect
+    hibernate.ddl-auto: update
+  jwt:
+    header: Authorization
+    secret: secret
