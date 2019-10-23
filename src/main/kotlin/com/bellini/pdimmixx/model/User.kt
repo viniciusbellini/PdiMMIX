@@ -11,7 +11,7 @@ data class User(
         @GeneratedValue
         @JsonProperty("id", access = JsonProperty.Access.READ_ONLY)
         val id: Long = 0L,
-        val name: String = "",
+        val fullName: String = "",
         val email: String = "",
         val password: String = "",
         val isActive: Boolean = true
