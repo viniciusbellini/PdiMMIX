@@ -1,22 +1,18 @@
 package com.bellini.pdimmixx.controller
 
+import com.bellini.pdimmixx.dto.UserDTO
 import com.bellini.pdimmixx.model.User
 import com.bellini.pdimmixx.service.UserService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.util.*
+import javax.validation.Valid
 
 @RestController
 @CrossOrigin(origins = ["*"])
-@RequestMapping("users")
-class UserController(private val userService: UserService) {
+@RequestMapping("/users")
+class UserController(
+        private val userService: UserService) {
 
     @GetMapping
     fun list(): ResponseEntity<List<User>> {
@@ -24,8 +20,14 @@ class UserController(private val userService: UserService) {
         return ResponseEntity.ok(allUsers)
     }
 
+    @GetMapping("{id}")
+    fun listById(@PathVariable id: Long): ResponseEntity<Optional<User>> {
+        val user = userService.findById(id)
+        return ResponseEntity.ok(user)
+    }
+
     @PostMapping
-    fun add(@RequestBody user: User): ResponseEntity<User> {
+    fun add(@Valid @RequestBody user: User): ResponseEntity<User> {
         val userSaved = userService.save(user)
         return ResponseEntity.ok(userSaved)
     }

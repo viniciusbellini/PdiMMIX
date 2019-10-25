@@ -3,6 +3,7 @@ package com.bellini.pdimmixx.service
 import com.bellini.pdimmixx.model.User
 import com.bellini.pdimmixx.repository.UserRepository
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class UserService(
@@ -27,5 +28,9 @@ class UserService(
     fun alter(id: Long, user: User): User {
         var safeUser = user.copy(id = id)
         return userRepository.save(safeUser)
+    }
+
+    fun findById(id: Long): Optional<User> {
+        return userRepository.findById(id)
     }
 }
