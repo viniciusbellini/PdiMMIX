@@ -12,6 +12,8 @@ data class User(
         @JsonProperty("id", access = JsonProperty.Access.READ_ONLY)
         val id: Long = 0L,
         val name: String = "",
+        val email: String = "",
         val password: String = "",
-        val isActive: Boolean = true
+        val isActive: Boolean = true,
+        val isAdmin: Boolean = false
 )
