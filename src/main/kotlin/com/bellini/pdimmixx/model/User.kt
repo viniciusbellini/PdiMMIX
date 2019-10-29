@@ -1,6 +1,5 @@
 package com.bellini.pdimmixx.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -17,4 +16,6 @@ data class User(
         val password: String = "",
         val isActive: Boolean = true,
         val isAdmin: Boolean = false
+
 )
+

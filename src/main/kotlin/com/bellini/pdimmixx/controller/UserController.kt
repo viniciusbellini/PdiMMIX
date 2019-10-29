@@ -1,5 +1,6 @@
 package com.bellini.pdimmixx.controller
 
+import com.bellini.pdimmixx.dto.UserDTO
 import com.bellini.pdimmixx.model.User
 import com.bellini.pdimmixx.service.UserService
 import org.springframework.http.ResponseEntity
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.stream.Collector
+import kotlin.streams.toList
 
 @RestController
 @CrossOrigin(origins = ["*"])
@@ -19,22 +22,23 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(private val userService: UserService) {
 
     @GetMapping
-    fun list(): ResponseEntity<List<User>> {
-        val allUsers = userService.all()
-        return ResponseEntity.ok(allUsers)
+    fun list(): ResponseEntity<List<UserDTO>> {
+        val listUsers = userService.findAll()
+        val listUsersDTO = listUsers.stream().map { user -> UserDTO(user) }.toList()
+        return ResponseEntity.ok(listUsersDTO)
     }
 
     @PostMapping
-    fun add(@RequestBody user: User): ResponseEntity<User> {
+    fun add(@RequestBody user: User): ResponseEntity<UserDTO> {
         val userSaved = userService.save(user)
-        return ResponseEntity.ok(userSaved)
+        return ResponseEntity.ok(UserDTO(userSaved))
     }
 
     @PutMapping("{id}")
-    fun alter(@PathVariable id: Long, @RequestBody user: User): ResponseEntity<User> {
+    fun alter(@PathVariable id: Long, @RequestBody user: User): ResponseEntity<UserDTO> {
         if (userService.existsById(id)) {
             val alteredUser = userService.alter(id, user)
-            return ResponseEntity.ok(alteredUser)
+            return ResponseEntity.ok(UserDTO(alteredUser))
         }
         return ResponseEntity.notFound().build()
     }

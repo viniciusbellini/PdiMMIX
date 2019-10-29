@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 class UserService(
         private val userRepository: UserRepository) {
 
-    fun all(): List<User> {
+    fun findAll(): List<User> {
         return userRepository.findAll().toList()
     }
 
