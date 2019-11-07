@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.validation.constraints.NotBlank
 
 @Entity
 data class User(
@@ -14,5 +15,6 @@ data class User(
         val fullName: String = "",
         val email: String = "",
         val password: String = "",
-        val isActive: Boolean = true
+        val isActive: Boolean = true,
+        val isAdmin: Boolean = false
 )
